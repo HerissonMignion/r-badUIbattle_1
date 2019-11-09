@@ -268,13 +268,25 @@ namespace C_FormTest1
 			Graphics g = Graphics.FromImage(img);
 			//g.DrawImage(this.backimg, 0, 0);
 			double arrowlength = (double)(this.Height / 2) * 0.8d; // 0.8d
+			double pointeLength = (double)(this.Height / 2) * 0.1d;
 
 
 
 			double arrowWidth = arrowlength * Math.Cos(this.ActualAngle);
 			double arrowHeight = arrowlength * Math.Sin(this.ActualAngle);
-			//dessine la flèche
-			g.DrawLine(Pens.Black, imgWidth / 2, imgHeight / 2, (imgWidth / 2) + (int)(arrowWidth), (imgHeight / 2) - (int)(arrowHeight));
+
+			double pointeWidth1 = pointeLength * Math.Sin(this.ActualAngle + (Math.PI / 4d));
+			double pointeHeight1 = pointeLength * Math.Cos(this.ActualAngle + (Math.PI / 4d));
+			double pointeWidth2 = pointeLength * Math.Sin(this.ActualAngle - (Math.PI / 4d));
+			double pointeHeight2 = pointeLength * Math.Cos(this.ActualAngle - (Math.PI / 4d));
+
+			////dessine la flèche
+			//l'arrière de la flèche
+			g.DrawLine(Pens.Black, imgWidth / 2, imgHeight / 2, (imgWidth / 2) - (int)(arrowWidth), (imgHeight / 2) + (int)(arrowHeight)); //dessine la ligne dans le sens opposé où elle pointe
+
+			//pointe
+			g.DrawLine(Pens.Black, imgWidth / 2, imgHeight / 2, (imgWidth / 2) - (int)pointeWidth1, (imgHeight / 2) - (int)pointeHeight1); // 1
+			g.DrawLine(Pens.Black, imgWidth / 2, imgHeight / 2, (imgWidth / 2) + (int)pointeWidth2, (imgHeight / 2) + (int)pointeHeight2); // 2
 
 
 			g.Dispose();
